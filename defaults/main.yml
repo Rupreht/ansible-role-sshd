@@ -1,0 +1,4 @@
+ansible_sshd_listenaddress: 0.0.0.0
+ansible_sshd_port: 22
+ansible_sshd_loglevel: INFO
+sftp_server: /usr/lib/openssh/sftp-server

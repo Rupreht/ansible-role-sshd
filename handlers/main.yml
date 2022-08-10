@@ -1,0 +1,33 @@
+# Handlers for sshd
+---
+- name: All setup keys
+  shell: ssh-keygen -A
+
+- name: Check config
+  shell: sshd -t
+
+- name: Enable ssh
+  service:
+    name: ssh
+    state: started
+    enabled: yes
+  when: ansible_os_family in ["Debian", "Ubuntu"]
+
+- name: Enable sshd
+  service:
+    name: sshd
+    state: started
+    enabled: yes
+  when: ansible_os_family in ["FreeBSD", "RedHat", "CentOS"]
+
+- name: Reload ssh
+  service:
+    name: ssh
+    state: restarted
+  when: ansible_os_family in ["Debian", "Ubuntu"]
+
+- name: Reload sshd
+  service:
+    name: sshd
+    state: restarted
+  when: ansible_os_family in ["FreeBSD", "RedHat", "CentOS"]
